@@ -1,0 +1,217 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Download MLV App, grade and convert Magic Lantern RAW video</title>
+        <meta name="description" content="What is MLV App? A cross platform RAW color grading and mov conversion software that works natively with Magic Lantern MLV files. Features: Import MLV files, Support for spanned mlv (.m00, .m01, ...), Support for lossless mlv, Support for any bit depth (…, 10, 12, 14bit), Demosaic bilinear or multithreaded AMaZE, Processing with many parameters (exposure, white balance, saturation, dark & light adjustments, sharpen,…), Processing filters for film emulation powered by neural networks, Processing in sRGB or several LOG, RAW corrections, fix focus, fix bad pixels, chroma smoothing, pattern noise, vertical stripes, deflicker, MLV darkframe subtraction">
+        <meta name="keywords" content="MLV, processing, RAW, grading, app, magic lantern, adobe, fastcinemadng, canon, 5D, video, movie, videotaping, MLV App, fast, free software">
+    </head>
+<body onload="test()">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        var LinkColour = "rgb(100,130,160)";
+        var TotalDownloads = 0;
+        var TotalDownloadsSize = 0;
+        var Releases;
+        function DealWithResponse()
+        {
+            // console.log(this.responseText);
+            Releases = JSON.parse(this.responseText);
+            var findImg = /(https?:\/\/.*\.(?:png|jpg|gif))/i;
+            var anImage = "dsfklj.com";
+            /* Find latest Qt Release */
+            for (var i = 0; i < Releases.length; i++)
+            {
+                {   
+                    console.log(Releases[i].name);
+                    let releaseFrame = document.createElement("div");
+                    releaseFrame.className = "frame";
+                    let release = document.createElement("div");
+                    release.className = "release";
+                    release.style = "overflow: hidden;";
+                    releaseFrame.appendChild(release);
+                    release.appendChild(document.createElement("div"));
+                    let ImageBox = document.createElement("div");
+                    // ImageBox.style = "width: 50%;";
+                    ImageBox.style = "width: 47%; max-width: 47%; float:left;";
+                    release.appendChild(ImageBox);
+                    /* Version title with link */
+                    let ReleaseLink = document.createElement("a");
+                    ReleaseLink.href = Releases[i].html_url;
+                    let Ver = document.createElement("h3");
+                    Ver.innerHTML = Releases[i].tag_name;
+                    Ver.style = "margin-top: 5px;";
+                    ReleaseLink.appendChild(Ver);
+                    ImageBox.appendChild(ReleaseLink);
+                    let Time = document.createElement("h4");
+                    let PublishDate = new Date(Releases[i].published_at);
+                    let TimeNow = new Date();
+                    let TimePassed = (TimeNow.getTime() - PublishDate.getTime());
+                    Time.innerHTML = (TimePassed / (24*3600*1000)).toFixed(0).toString() + " days ago";
+                    Time.style.color = "rgb(133,133,133)";
+                    Time.style.lineHeight = "0";
+                    // Time.style.float = "0";
+                    ImageBox.appendChild(Time);
+                    if (i > 0) {
+                        let PicLink = document.createElement("a");
+                        if (!findImg.test(Releases[i].body)) PicLink.href = "https://raw.githubusercontent.com/ilia3101/MLV-App/master/src/icon/icon.png";
+                        else {
+                            PicLink.href = Releases[i].body.match(findImg);
+                            if (PicLink.href.includes(".png")) {
+                                PicLink.href = PicLink.href.substring(0, PicLink.href.indexOf('.png')) + ".png";
+                            }
+                            PicLink.href = PicLink.href.replace("http:", "https:");
+                        }
+                        let Pic = document.createElement("img");
+                        Pic.onerror = function() {
+                            Pic.parentNode.removeChild(Pic);
+                        };
+                        Pic.className = "picture";
+                        Pic.src = PicLink.href;
+                        PicLink.appendChild(Pic);
+                        ImageBox.appendChild(PicLink);
+                    }
+                    else {
+                        ImageBox.innerHTML = ImageBox.innerHTML + marked(Releases[i].body);
+                    }
+                    // release.appendChild(document.createElement("hr"));
+                    let DownloadsBoxBox = document.createElement("div");
+                    DownloadsBoxBox.style = "width: 50%; float: right; margin: 0px; padding: 0px; height: 100%; /* background-color: #f55; */";
+                    let DownloadsBox = document.createElement("div");
+                    // DownloadsBox.align = "right";
+                    DownloadsBox.style = "width: 100%; /* background-color: #ccc; */ display: inline-block; margin: 0 auto;";
+                    let Downloads = document.createElement("h4");
+                    Downloads.innerHTML = "Downloads";
+                    Downloads.style = "text-align: center; padding-top: 15px;";
+                    DownloadsBox.appendChild(Downloads);
+                    let Table = document.createElement("table");
+                    Table.align = "top";
+                    Table.style = "width: 100%;";
+                    for (var j = 0; j < Releases[i].assets.length; j++)
+                    {
+                        let TableRow = document.createElement("tr");
+                        TableRow.style = "width: 100%;";
+                        let LinkCell = document.createElement("td");
+                        let link = document.createElement("a");
+                        link.href = Releases[i].assets[j].browser_download_url;
+                        let text = document.createElement("h4");
+                        text.style.lineHeight = "3px";3
+                        text.innerHTML = Releases[i].assets[j].name;
+                        text.style.color = LinkColour;
+                        link.appendChild(text);
+                        LinkCell.appendChild(link);
+                        TableRow.appendChild(LinkCell);
+                        let DownloadCountCell = document.createElement("td");
+                        DownloadCountCell.style.width = "100%";
+                        let DownloadCount = document.createElement("h4");
+                        DownloadCount.align = "right";
+                        DownloadCount.style.verticalAlign = "bottom";
+                        DownloadCount.style.color = "rgb(133,133,133)";
+                        DownloadCount.style.lineHeight = "25px";
+                        DownloadCount.style.paddingTop = "11px";
+                        DownloadCount.innerHTML = Releases[i].assets[j].download_count.toString() + "&darr;";
+                        DownloadCountCell.appendChild(DownloadCount);
+                        TableRow.appendChild(DownloadCountCell);
+                        Table.appendChild(TableRow);
+                        TotalDownloads = TotalDownloads + Releases[i].assets[j].download_count;
+                        TotalDownloadsSize = TotalDownloadsSize + Releases[i].assets[j].size * Releases[i].assets[j].download_count;
+                    }
+                    DownloadsBox.appendChild(Table);
+                    DownloadsBoxBox.appendChild(DownloadsBox);
+                    release.appendChild(DownloadsBoxBox);
+                    let releasebox = document.getElementById("Releases");
+                    releasebox.appendChild(releaseFrame);
+                    releasebox.appendChild(document.createElement("br"));
+                }
+            }
+            
+            console.log("Download count: " + TotalDownloads.toFixed(0).toString());
+            console.log("Download GB: " + TotalDownloadsSize.toFixed(0).toString());
+            document.getElementById("TotalDownloadsLabel").innerHTML = TotalDownloads.toFixed(0).toString() + " total downloads" /* + " (" + (TotalDownloadsSize/(1000000000)).toFixed(1).toString() + "GB)" */;
+        }
+    function test()
+    {
+        // Create a new request object
+        var request = new XMLHttpRequest();
+        request.onload = DealWithResponse;
+        // Initialize a request
+        request.open('get', 'https://api.github.com/repos/ilia3101/MLV-App/releases')
+        // Send it
+        request.send()
+    }
+    </script>
+    
+    <style>
+        h1, h2, h3, h4 {
+            font-weight: 500;
+            letter-spacing: 0.011em;
+        }
+    h1 { font-size: 55px; }
+    h2 { font-size: 32px; }
+    h3 { font-size: 25px; }
+    li, h1, h2, h2, h3, h4, h5, h6, p {
+        font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+        color: #333;
+    }
+    img {
+        max-width: 100%;
+    }
+    body {
+        background-color: #ffffff;
+    }
+    a {
+        text-decoration: none;
+        color: #acf;
+    }
+    hr {
+        border: 1px solid #eee;
+    }
+    tr {
+        padding: 0px;
+    }
+    .release {
+        z-index: 1;
+        border-radius: 4px;
+        transition: box-shadow 0.16s ease, background-color 1.3s ease, border 0.23s ease/* , transform 0.15s ease */;
+        box-shadow: 4px 4px 10px #1111;
+        border: 2px solid #eee4;
+        background-color: #fefefe;
+        padding: 14px;
+    }
+    .release:hover {
+        border-radius: 6px;
+        background-color: #ffffff;
+        box-shadow: 6px 6px 27px #1111;
+        border: 2px solid #aaa1;
+        /* transform: scale(1.003,1.003); */
+    }
+    .frame {
+        padding: 14px;
+    }
+    .picture {
+        max-width:95%;
+        max-height:300px;
+        transition: transform 0.16s ease;
+    }
+    div.time {
+        position: fixed; left: 0px; top: 0px; right: 0px; width:100vw; height:30px;
+    }
+    </style>
+    
+    <div style="z-index: 2; position: fixed; left: 0px; top: 0px; right: 0px; width:100vw; height:100px; background-color: #333; box-shadow: 7px 7px 33px #0004;">
+        <div style="width:957px; margin: auto;">
+            <h2 style="position: absolute; top: 0px; color: #eee;">MLV App Downloads</h2>
+            <h4 id="TotalDownloadsLabel" style="margin-top: 37px; color: #eee;" align="right"></h4>
+        </div>
+    </div>
+    
+    <div style="width:980px; margin: auto;">
+        <br><br><br><br><br><br><br>
+        <table>
+            <td style="width: 978px; vertical-align: top;">
+                <div id="Releases"></div>
+            </td>
+        </table>
+    </div>
+    
+    
+</body></html>
