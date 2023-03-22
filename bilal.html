@@ -118,7 +118,6 @@ div.time {
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
-
 <!-- Load Stripe.js on your website. -->
 <script src="https://js.stripe.com/v3"></script>
 
@@ -129,7 +128,7 @@ div.time {
   role="link"
   type="button"
 >
-  Donate
+  Checkout
 </button>
 
 <div id="error-message"></div>
@@ -154,8 +153,8 @@ div.time {
        * Instead use one of the strategies described in
        * https://stripe.com/docs/payments/checkout/fulfill-orders
        */
-      successUrl: window.location.protocol + '//mlv.app/thankyou',
-      cancelUrl: window.location.protocol + '//mlv.app/bilal',
+      successUrl: 'https://mlv.app/thankyou',
+      cancelUrl: 'https://mlv.app/bilal',
     })
     .then(function (result) {
       if (result.error) {
