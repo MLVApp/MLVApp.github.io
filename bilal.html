@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Download MLV App, grade and convert Magic Lantern RAW video</title>
+<title>Bilal ML Donations</title>
 <meta name="description" content="What is MLV App? A cross platform RAW color grading and mov conversion software that works natively with Magic Lantern MLV files. Features: Import MLV files, Support for spanned mlv (.m00, .m01, ...), Support for lossless mlv, Support for any bit depth (…, 10, 12, 14bit), Demosaic bilinear or multithreaded AMaZE, Processing with many parameters (exposure, white balance, saturation, dark & light adjustments, sharpen,…), Processing filters for film emulation powered by neural networks, Processing in sRGB or several LOG, RAW corrections, fix focus, fix bad pixels, chroma smoothing, pattern noise, vertical stripes, deflicker, MLV darkframe subtraction">
 <meta name="keywords" content="MLV, processing, RAW, grading, app, magic lantern, adobe, fastcinemadng, canon, 5D, video, movie, videotaping, MLV App, fast, free software">
 <!-- <meta name="referrer" content="no-referrer" /> -->
@@ -26,7 +26,7 @@ var Releases;
 
 function make_thing()
 {
-    document.getElementById("stuff").innerHTML = marked("hello");
+    // document.getElementById("stuff").innerHTML = marked("hello");
 }
 
 </script>
@@ -90,9 +90,9 @@ div.time {
 
 <div style="z-index: 2; position: fixed; left: 0px; top: 0px; right: 0px; width:100vw; height:100px; background-color: #333; box-shadow: 7px 7px 33px #0004;">
 <div style="width:957px; margin: auto;">
-    <h2 style="position: absolute; top: 0px; color: #eee;">MLV App Downloads</h2>
+    <h2 style="position: absolute; top: 0px; color: #eee;">MLV App</h2>
     <a href="https://github.com/ilia3101/MLV-App" title="Source code on GitHub" style="margin-top: 31px; color: #eee; padding-left: 20px; padding-right: 5px; float: right;" align="right"><img style="width:32px; height:32px;" src="github.png"></img></a>
-    <h4 id="TotalDownloadsLabel" style="margin-top: 37px; color: #eee; float: right;"></h4>
+    <h4 id="TotalDownloadsLabel" style="margin-top: 37px; color: #eee; float: right;"><a style="color:inherit;" href="https://mlv.app">Dowloads</a></h4>
 </div>
 </div>
 
@@ -110,6 +110,7 @@ div.time {
                 <!-- </div> -->
             <!-- </div> -->
 
+<div style="text-align:center">
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
@@ -118,69 +119,28 @@ div.time {
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
 <!---------------------------------------------------------------- STRIPE ------------------------------------------------------------------>
-<!-- Load Stripe.js on your website. -->
-<script src="https://js.stripe.com/v3"></script>
-
-<!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
-<button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
-  id="checkout-button-price_1MoWSsDroNhjWRg15IFt1f7G"
-  role="link"
-  type="button"
->
-  Checkout
-</button>
-
-<div id="error-message"></div>
-
-<script>
-(function() {
-  var stripe = Stripe('pk_live_51L2Hd6DroNhjWRg1V2tR3PcoZmihRC69O8dhp0631CqLP6Sh76j7PCiaIH3sC3zqXn8NyL0STtmpVyjGCVgOzTDJ002jhpHvfu');
-
-  var checkoutButton = document.getElementById('checkout-button-price_1MoWSsDroNhjWRg15IFt1f7G');
-  checkoutButton.addEventListener('click', function () {
-    /*
-     * When the customer clicks on the button, redirect
-     * them to Checkout.
-     */
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1MoWSsDroNhjWRg15IFt1f7G', quantity: 1}],
-      mode: 'payment',
-      /*
-       * Do not rely on the redirect to the successUrl for fulfilling
-       * purchases, customers may not always reach the success_url after
-       * a successful payment.
-       * Instead use one of the strategies described in
-       * https://stripe.com/docs/payments/checkout/fulfill-orders
-       */
-      successUrl: 'https://mlv.app/thankyou',
-      cancelUrl: 'https://mlv.app/bilal',
-    })
-    .then(function (result) {
-      if (result.error) {
-        /*
-         * If `redirectToCheckout` fails due to a browser or network
-         * error, display the localized error message to your customer.
-         */
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
+<script async
+  src="https://js.stripe.com/v3/buy-button.js">
 </script>
 
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
-<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
 
+  <stripe-buy-button
+    buy-button-id="buy_btn_1MoX66DroNhjWRg1haQXXVus"
+    publishable-key="pk_live_51L2Hd6DroNhjWRg1V2tR3PcoZmihRC69O8dhp0631CqLP6Sh76j7PCiaIH3sC3zqXn8NyL0STtmpVyjGCVgOzTDJ002jhpHvfu"
+  >
+  </stripe-buy-button>
+
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+<!------------------------------------------------------------- END OF STRIPE -------------------------------------------------------------->
+</div>
         </div>
     </td>
 </table>
